@@ -12,7 +12,7 @@ namespace AddressBookSystem
             int choice;
             do
             {
-                Console.WriteLine("\nMenu : \n1.Add Contact \n2.Edit Contact \n0.Exit");
+                Console.WriteLine("\nMenu : \n1.Add Contact \n2.Edit Contact \n3.Delete Contact\n0.Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -36,6 +36,21 @@ namespace AddressBookSystem
                             SetContactDetails(contact2);
                             addressBook.ContactList[index] = contact2;
                             Console.WriteLine("Contact Updated Successfully");
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the First Name of Contact you wish to delete");
+                        string fname = Console.ReadLine();
+                        int idx = addressBook.FindByFirstName(fname);
+                        if(idx == -1)
+                        {
+                            Console.WriteLine("No Contact Exists with Following First Name");
+                            continue;
+                        }
+                        else
+                        {
+                            addressBook.DeleteContact(idx);
+                            Console.WriteLine("Contact Deleted Successfully");
                         }
                         break;
                 }
