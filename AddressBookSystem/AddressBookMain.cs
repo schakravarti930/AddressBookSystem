@@ -9,19 +9,40 @@ namespace AddressBookSystem
         {
             AddressBook addressBook = new AddressBook();
             Console.WriteLine("Welcome To Address Book Program");
-            Console.WriteLine("Menu : \n1.Add Contact");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            int choice;
+            do
             {
-                case 1:
-                    Contact contact = new Contact();
-                    setContactDetails(contact);
-                    addressBook.AddContact(contact);
-                    break;
-            }
-            Console.WriteLine(addressBook.ContactList.Count);
+                Console.WriteLine("\nMenu : \n1.Add Contact \n2.Edit Contact \n0.Exit");
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Contact contact = new Contact();
+                        SetContactDetails(contact);
+                        addressBook.AddContact(contact);
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
+                        long phoneNumber = long.Parse(Console.ReadLine());
+                        int index = addressBook.FindByPhoneNum(phoneNumber);
+                        if (index == -1)
+                        {
+                            Console.WriteLine("No Contact Exists With Following Phone Number");
+                            continue;
+                        }
+                        else
+                        {
+                            Contact contact2 = new Contact();
+                            SetContactDetails(contact2);
+                            addressBook.ContactList[index] = contact2;
+                            Console.WriteLine("Contact Updated Successfully");
+                        }
+                        break;
+                }
+            } while (choice != 0);
         }
-        public static void setContactDetails(Contact contact)
+
+        public static void SetContactDetails(Contact contact)
         {
             Console.WriteLine("Enter the First Name");
             contact.FirstName = Console.ReadLine();
