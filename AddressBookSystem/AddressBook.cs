@@ -11,5 +11,10 @@ namespace AddressBookSystem
         {
             this.ContactList = new List<Contact>();
         }
+        //Add Contact to Address Book
+        public void AddContact(Contact contactObj)
+        {
+            this.ContactList.Add(contactObj);
+        }
     }
 }
