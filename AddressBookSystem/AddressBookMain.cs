@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AddressBookSystem
 {
     class AddressBookMain
     {
         public static Dictionary<string, AddressBook> AddressBookMap = new Dictionary<string, AddressBook>();
+        public static Dictionary<Contact, string> CitywiseContactMap = new Dictionary<Contact, string>();
+        public static Dictionary<Contact, string> StatewiseContactMap = new Dictionary<Contact, string>();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Address Book Program");
@@ -13,7 +16,7 @@ namespace AddressBookSystem
             string name;
             do
             {
-                Console.WriteLine("\nMenu : \n 1.Add New Address Book \n 2.Work On Existing Address Book \n 3.Exit");
+                Console.WriteLine("\nMenu : \n 1.Add New Address Book \n 2.Work On Existing Address Book \n 3.View Contact By City or State \n 4.Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -27,6 +30,9 @@ namespace AddressBookSystem
                         name = Console.ReadLine();
                         AddressBook addressBook = AddressBookMap[name];
                         FillAddressBook(addressBook);
+                        break;
+                    case 3:
+                        ViewPersonByCityOrState();
                         break;
                 }
             } while (choice != 3);
@@ -50,6 +56,8 @@ namespace AddressBookSystem
             contact.PhoneNumber = long.Parse(Console.ReadLine());
             Console.WriteLine("Enter the email address");
             contact.Email = Console.ReadLine();
+            CitywiseContactMap[contact] = contact.City;
+            StatewiseContactMap[contact] = contact.State;
         }
 
         public static void FillAddressBook(AddressBook addressBook)
@@ -100,6 +108,43 @@ namespace AddressBookSystem
                         break;
                 }
             } while (choice != 0);
+        }
+        public static void ViewPersonByCityOrState()
+        {
+            int choice;
+            Console.WriteLine("1.View Person Contact By City \n2.View Person Contact By State");
+            choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the City Name");
+                    string city = Console.ReadLine();
+                    List<Contact> contactListInGivenCity = new List<Contact>();
+                    foreach(KeyValuePair<Contact,string> kvp in CitywiseContactMap)
+                    {
+                        if (kvp.Value.Equals(city))
+                            contactListInGivenCity.Add(kvp.Key);
+                    }
+                    foreach(Contact contact in contactListInGivenCity)
+                    {
+                        Console.WriteLine(contact);
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the State Name");
+                    string state = Console.ReadLine();
+                    List<Contact> contactListInGivenState = new List<Contact>();
+                    foreach (KeyValuePair<Contact, string> kvp in StatewiseContactMap)
+                    {
+                        if (kvp.Value.Equals(state))
+                            contactListInGivenState.Add(kvp.Key);
+                    }
+                    foreach (Contact contact in contactListInGivenState)
+                    {
+                        Console.WriteLine(contact);
+                    }
+                    break;
+            }
         }
     }
 }

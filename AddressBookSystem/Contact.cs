@@ -21,5 +21,9 @@ namespace AddressBookSystem
                 return false;
             return this.FirstName.Equals(contact.FirstName) && this.LastName.Equals(contact.LastName);
         }
+        public override string ToString()
+        {
+            return $"Name : {FirstName} {LastName} \nAddress : {Address} \nCity : {City} \nState : {State} \nZip : {Zip} \nPhone : {PhoneNumber} \nEmail : {Email}";
+        }
     }
 }
