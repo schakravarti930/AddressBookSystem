@@ -14,7 +14,10 @@ namespace AddressBookSystem
         //Add Contact to Address Book
         public void AddContact(Contact contactObj)
         {
-            this.ContactList.Add(contactObj);
+            if (this.ContactList.Find(e => e.Equals(contactObj)) != null)
+                Console.WriteLine("The Contact Already Exists! Try Again.");
+            else
+                this.ContactList.Add(contactObj);
         }
         //Find Contact Object Index By Mobile Number
         public int FindByPhoneNum(long phoneNumber)
@@ -26,7 +29,7 @@ namespace AddressBookSystem
         {
             return this.ContactList.FindIndex(contact => contact.FirstName.Equals(firstName));
         }
-        //Delete a Give Contact By Index
+        //Delete a Given Contact By Index
         public void DeleteContact(int index)
         {
             this.ContactList.RemoveAt(index);
