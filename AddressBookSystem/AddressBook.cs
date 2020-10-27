@@ -39,5 +39,17 @@ namespace AddressBookSystem
         {
             return this.ContactList.OrderBy(contact => contact.FirstName).ToList();
         }
+        public List<Contact> SortByCity()
+        {
+            return this.ContactList.OrderBy(contact => contact.City).ToList();
+        }
+        public List<Contact> SortByState()
+        {
+            return this.ContactList.OrderBy(contact => contact.State).ToList();
+        }
+        public List<Contact> SortByZip()
+        {
+            return this.ContactList.OrderBy(contact => contact.Zip).ToList();
+        }
     }
 }
