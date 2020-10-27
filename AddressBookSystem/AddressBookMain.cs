@@ -40,7 +40,6 @@ namespace AddressBookSystem
                 }
             } while (choice != 5);
          }
-
         public static void SetContactDetails(Contact contact)
         {
             Console.WriteLine("Enter the First Name");
@@ -149,7 +148,6 @@ namespace AddressBookSystem
                     break;
             }
         }
-
         public static void CountPersonByCityOrState()
         {
             int count = 0;
