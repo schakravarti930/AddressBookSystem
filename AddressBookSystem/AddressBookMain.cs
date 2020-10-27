@@ -16,7 +16,7 @@ namespace AddressBookSystem
             string name;
             do
             {
-                Console.WriteLine("\nMenu : \n 1.Add New Address Book \n 2.Work On Existing Address Book \n 3.View Contact By City or State \n 4.Exit");
+                Console.WriteLine("\nMenu : \n 1.Add New Address Book \n 2.Work On Existing Address Book \n 3.View Contact By City or State \n4.Count by city \n 5.Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -34,8 +34,11 @@ namespace AddressBookSystem
                     case 3:
                         ViewPersonByCityOrState();
                         break;
+                    case 4:
+                        CountPersonByCityOrState();
+                        break;
                 }
-            } while (choice != 3);
+            } while (choice != 5);
          }
 
         public static void SetContactDetails(Contact contact)
@@ -145,6 +148,19 @@ namespace AddressBookSystem
                     }
                     break;
             }
+        }
+
+        public static void CountPersonByCityOrState()
+        {
+            int count = 0;
+            Console.WriteLine("Enter the city name");
+            string city = Console.ReadLine();
+            foreach(KeyValuePair<Contact,string> kvp in CitywiseContactMap)
+            {
+                if(kvp.Value.Equals(city))
+                    count++;
+            }
+            System.Console.WriteLine($"{count} contacts in given city");
         }
     }
 }
