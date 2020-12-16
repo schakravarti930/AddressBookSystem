@@ -19,7 +19,32 @@ namespace AddressBookSystem
             Contact contact = obj as Contact;
             if (obj == null)
                 return false;
-            return this.FirstName.Equals(contact.FirstName) && this.LastName.Equals(contact.LastName);
+            return contact.FirstName.Equals(this.FirstName) && contact.LastName.Equals(this.LastName);
+        }
+        public void SetContactDetails()
+        {
+            Console.WriteLine("Enter the First Name");
+            this.FirstName = Console.ReadLine();
+            Console.WriteLine("Enter the Last Name");
+            this.LastName = Console.ReadLine();
+            Console.WriteLine("Enter the Address");
+            this.Address = Console.ReadLine();
+            Console.WriteLine("Enter the City Name");
+            this.City = Console.ReadLine();
+            Console.WriteLine("Enter the State Name");
+            this.State = Console.ReadLine();
+            Console.WriteLine("Enter the zip code");
+            this.Zip = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the Phone Number");
+            this.PhoneNumber = long.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the email address");
+            this.Email = Console.ReadLine();
+            /*List<Contact> citywise = CityWiseContacts[this.City];
+            citywise.Add(this);
+            CityWiseContacts.Add(this.City, citywise);
+            List<Contact> statewise = StateWiseContacts[this.State];
+            statewise.Add(this);
+            StateWiseContacts.Add(this.State, statewise);*/
         }
     }
 }
