@@ -4,7 +4,8 @@ using System.Text;
 
 namespace AddressBookSystem
 {
-    class Contact
+    [Serializable()]
+    public class Contact
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,6 +25,25 @@ namespace AddressBookSystem
         public override string ToString()
         {
             return $"Name : {FirstName} {LastName} \nAddress : {Address} \nCity : {City} \nState : {State} \nZip : {Zip} \nPhone : {PhoneNumber} \nEmail : {Email}";
+        }
+        public void SetContactDetails()
+        {
+            Console.WriteLine("Enter the First Name");
+            FirstName = Console.ReadLine();
+            Console.WriteLine("Enter the Last Name");
+            LastName = Console.ReadLine();
+            Console.WriteLine("Enter the Address");
+            Address = Console.ReadLine();
+            Console.WriteLine("Enter the City Name");
+            City = Console.ReadLine();
+            Console.WriteLine("Enter the State Name");
+            State = Console.ReadLine();
+            Console.WriteLine("Enter the zip code");
+            Zip = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the Phone Number");
+            PhoneNumber = long.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the email address");
+            Email = Console.ReadLine();
         }
     }
 }

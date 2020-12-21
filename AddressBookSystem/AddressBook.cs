@@ -5,7 +5,8 @@ using System.Text;
 
 namespace AddressBookSystem
 {
-    class AddressBook
+    [Serializable()]
+    public class AddressBook 
     {
         public List<Contact> ContactList;
         public AddressBook()
@@ -47,9 +48,58 @@ namespace AddressBookSystem
         {
             return this.ContactList.OrderBy(contact => contact.State).ToList();
         }
-        public List<Contact> SortByZip()
+        public List<Contact> SortByZip() 
         {
             return this.ContactList.OrderBy(contact => contact.Zip).ToList();
+        }
+        public void FillAddressBook()
+        {
+            int choice;
+            do
+            {
+                Console.WriteLine("\nMenu : \n1.Add Contact \n2.Edit Contact \n3.Delete Contact\n0.Exit");
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Contact contact = new Contact();
+                        contact.SetContactDetails();
+                        this.AddContact(contact);
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
+                        long phoneNumber = long.Parse(Console.ReadLine());
+                        int index = this.FindByPhoneNum(phoneNumber);
+                        if (index == -1)
+                        {
+                            Console.WriteLine("No Contact Exists With Following Phone Number");
+                            continue;
+                        }
+                        else
+                        {
+                            Contact contact2 = new Contact();
+                            contact2.SetContactDetails();
+                            this.ContactList[index] = contact2;
+                            Console.WriteLine("Contact Updated Successfully");
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the First Name of Contact you wish to delete");
+                        string fname = Console.ReadLine();
+                        int idx = this.FindByFirstName(fname);
+                        if (idx == -1)
+                        {
+                            Console.WriteLine("No Contact Exists with Following First Name");
+                            continue;
+                        }
+                        else
+                        {
+                            this.DeleteContact(idx);
+                            Console.WriteLine("Contact Deleted Successfully");
+                        }
+                        break;
+                }
+            } while (choice != 0);
         }
     }
 }
